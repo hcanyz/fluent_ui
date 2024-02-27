@@ -19,7 +19,6 @@ class ButtonPage extends StatefulWidget {
 class _ButtonPageState extends State<ButtonPage> with PageMixin {
   bool simpleDisabled = false;
   bool filledDisabled = false;
-  bool hyperlinkDisabled = false;
   bool iconDisabled = false;
   bool iconSmall = false;
   bool toggleDisabled = false;
@@ -133,34 +132,20 @@ class _ButtonPageState extends State<ButtonPage> with PageMixin {
     );
   },
 )''',
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Link(
-                uri: Uri.parse('https://github.com/bdlukaa/fluent_ui'),
-                builder: (context, open) {
-                  return Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: HyperlinkButton(
-                      onPressed: hyperlinkDisabled ? null : open,
-                      child: Semantics(
-                        link: true,
-                        child: Text('Fluent UI homepage'),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              ToggleSwitch(
-                checked: hyperlinkDisabled,
-                onChanged: (v) {
-                  setState(() {
-                    hyperlinkDisabled = v;
-                  });
-                },
-                content: const Text('Disabled'),
-              ),
-            ],
+          child: Link(
+            uri: Uri.parse('https://github.com/bdlukaa/fluent_ui'),
+            builder: (context, open) {
+              return Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: HyperlinkButton(
+                  onPressed: open,
+                  child: Semantics(
+                    link: true,
+                    child: Text('Fluent UI homepage'),
+                  ),
+                ),
+              );
+            },
           ),
         ),
         subtitle(

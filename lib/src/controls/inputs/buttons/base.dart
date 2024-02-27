@@ -1,3 +1,4 @@
+// import 'package:flutter/material.dart' as m;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 
@@ -108,21 +109,10 @@ abstract class BaseButton extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(DiagnosticsProperty<ButtonStyle>(
-        'style',
-        style,
-        defaultValue: null,
-      ))
-      ..add(DiagnosticsProperty<FocusNode>(
-        'focusNode',
-        focusNode,
-        defaultValue: null,
-      ))
-      ..add(DiagnosticsProperty<bool>(
-        'autofocus',
-        autofocus,
-        defaultValue: false,
-      ));
+      ..add(
+          DiagnosticsProperty<ButtonStyle>('style', style, defaultValue: null))
+      ..add(DiagnosticsProperty<FocusNode>('focusNode', focusNode,
+          defaultValue: null));
   }
 }
 
@@ -213,12 +203,7 @@ class _BaseButtonState extends State<BaseButton> {
                           .copyWith(color: resolvedForegroundColor),
                     ),
                 textAlign: TextAlign.center,
-                // used to align the child without expanding the button
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [widget.child],
-                ),
+                child: widget.child,
               ),
             ),
           ),
