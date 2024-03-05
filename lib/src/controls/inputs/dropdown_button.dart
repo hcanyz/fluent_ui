@@ -27,7 +27,8 @@ class DropDownButton extends StatefulWidget {
   const DropDownButton({
     super.key,
     this.buttonBuilder,
-    required this.items,
+    this.items,
+    this.itemBuilder,
     this.leading,
     this.title,
     this.trailing = _kDefaultDropdownButtonTrailing,
@@ -42,7 +43,8 @@ class DropDownButton extends StatefulWidget {
     this.onOpen,
     this.onClose,
     this.transitionBuilder = _defaultTransitionBuilder,
-  }) : assert(items.length > 0, 'You must provide at least one item');
+  }) : assert((items != null && items.length > 0) || itemBuilder != null,
+            'items or itemBuilder must be provided');
 
   /// A builder for the button. If null, a [Button] with [leading], [title] and
   /// [trailing] is used.
@@ -83,7 +85,11 @@ class DropDownButton extends StatefulWidget {
   ///  * [MenuFlyoutSubItem], which represents a menu item that displays a
   ///    sub-menu in a [MenuFlyout]
   ///  * [MenuFlyoutItemBuilder], which renders the given widget in the items list
-  final List<MenuFlyoutItemBase> items;
+  final List<MenuFlyoutItemBase>? items;
+
+  final Widget Function(
+          Widget Function(List<MenuFlyoutItemBase> items) itemsConverter)?
+      itemBuilder;
 
   /// Whether the flyout will be closed after an item is tapped.
   ///
@@ -333,12 +339,21 @@ class DropDownButtonState extends State<DropDownButton> {
       dismissWithEsc: dismissWithEsc,
       transitionBuilder: widget.transitionBuilder,
       builder: (context) {
-        return MenuFlyout(
-          color: widget.menuColor,
-          shape: widget.menuShape,
-          items:
-              widget.items.map((item) => transformItem(item, context)).toList(),
-        );
+        final items = widget.items;
+        if (items != null) {
+          return MenuFlyout(
+            color: widget.menuColor,
+            shape: widget.menuShape,
+            items: items.map((item) => transformItem(item, context)).toList(),
+          );
+        }
+        return widget.itemBuilder!((List<MenuFlyoutItemBase> items) {
+          return MenuFlyout(
+            color: widget.menuColor,
+            shape: widget.menuShape,
+            items: items.map((item) => transformItem(item, context)).toList(),
+          );
+        });
       },
     );
     widget.onClose?.call();
