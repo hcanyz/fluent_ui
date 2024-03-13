@@ -33,6 +33,7 @@ class DropDownButton extends StatefulWidget {
     this.title,
     this.trailing = _kDefaultDropdownButtonTrailing,
     this.verticalOffset = _kVerticalOffset,
+    // TODO this Can it be replaced by MenuFlyoutItem.closeAfterClick
     this.closeAfterClick = true,
     this.disabled = false,
     this.focusNode,
@@ -376,6 +377,7 @@ class DropDownButtonState extends State<DropDownButton> {
     return MenuFlyoutSubItem(
       key: item.key,
       text: item.text,
+      closeAfterClick: item.closeAfterClick,
       items: (context) => item.items
           .call(context)
           .map((item) => transformItem(item, context))
@@ -398,6 +400,7 @@ class DropDownButtonState extends State<DropDownButton> {
       text: item.text,
       trailing: item.trailing,
       selected: item.selected,
+      closeAfterClick: item.closeAfterClick,
     );
   }
 }

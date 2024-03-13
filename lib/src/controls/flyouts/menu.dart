@@ -230,6 +230,7 @@ class MenuFlyoutItem extends MenuFlyoutItemBase {
     this.trailing,
     required this.onPressed,
     this.selected = false,
+    this.closeAfterClick = true,
   });
 
   /// Displayed before [text].
@@ -259,6 +260,8 @@ class MenuFlyoutItem extends MenuFlyoutItemBase {
   /// Whether this item is selected or not.
   final bool selected;
 
+  final bool closeAfterClick;
+
   bool _useIconPlaceholder = false;
 
   @override
@@ -281,7 +284,9 @@ class MenuFlyoutItem extends MenuFlyoutItemBase {
           child: trailing ?? const SizedBox.shrink(),
         ),
         onPressed: () {
-          Navigator.of(context).maybePop();
+          if (closeAfterClick) {
+            Navigator.of(context).maybePop();
+          }
           onPressed?.call();
         },
       ),
@@ -348,6 +353,7 @@ class MenuFlyoutSubItem extends MenuFlyoutItem {
     super.leading,
     required super.text,
     super.trailing = const Icon(FluentIcons.chevron_right),
+    super.closeAfterClick,
     required this.items,
     this.showBehavior = SubItemShowBehavior.hover,
     this.showHoverDelay = const Duration(milliseconds: 450),
@@ -438,6 +444,7 @@ class _MenuFlyoutSubItemState extends State<_MenuFlyoutSubItem>
       onPressed: () {
         show(menuInfo);
       },
+      closeAfterClick: widget.item.closeAfterClick,
     ).build(context);
 
     if (widget.item.showBehavior == SubItemShowBehavior.hover) {
