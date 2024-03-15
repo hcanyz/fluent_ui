@@ -33,6 +33,8 @@ class DropDownButton extends StatefulWidget {
     this.title,
     this.trailing = _kDefaultDropdownButtonTrailing,
     this.verticalOffset = _kVerticalOffset,
+    this.barrierDismissible = true,
+    this.barrierDismissibleOnPointerDown = false,
     // TODO this Can it be replaced by MenuFlyoutItem.closeAfterClick
     this.closeAfterClick = true,
     this.disabled = false,
@@ -74,6 +76,10 @@ class DropDownButton extends StatefulWidget {
   ///
   /// 6.0 is used by default
   final double verticalOffset;
+
+  final bool barrierDismissible;
+
+  final bool barrierDismissibleOnPointerDown;
 
   /// The items in the flyout. Must not be empty
   ///
@@ -321,7 +327,6 @@ class DropDownButtonState extends State<DropDownButton> {
   ///
   ///  * [FlyoutController.showFlyout], which is used to show the dropdown flyout
   void open({
-    bool barrierDismissible = true,
     bool dismissWithEsc = true,
     bool dismissOnPointerMoveAway = false,
   }) async {
@@ -335,7 +340,8 @@ class DropDownButtonState extends State<DropDownButton> {
         preferredMode: widget.placement,
       ),
       additionalOffset: widget.verticalOffset,
-      barrierDismissible: barrierDismissible,
+      barrierDismissible: widget.barrierDismissible,
+      barrierDismissibleOnPointerDown: widget.barrierDismissibleOnPointerDown,
       dismissOnPointerMoveAway: dismissOnPointerMoveAway,
       dismissWithEsc: dismissWithEsc,
       transitionBuilder: widget.transitionBuilder,

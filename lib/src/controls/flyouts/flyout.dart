@@ -543,6 +543,7 @@ class FlyoutController with ChangeNotifier {
   Future<T?> showFlyout<T>({
     required WidgetBuilder builder,
     bool barrierDismissible = true,
+    bool barrierDismissibleOnPointerDown = false,
     bool dismissWithEsc = true,
     bool dismissOnPointerMoveAway = false,
     FlyoutPlacementMode placementMode = FlyoutPlacementMode.auto,
@@ -657,7 +658,11 @@ class FlyoutController with ChangeNotifier {
                 Positioned.fill(
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTap: barrierDismissible ? navigator.pop : null,
+                    onTapDown: barrierDismissibleOnPointerDown
+                        ? (_) => navigator.pop()
+                        : null,
+                    onTap:
+                        !barrierDismissibleOnPointerDown ? navigator.pop : null,
                     child: barrier,
                   ),
                 ),
