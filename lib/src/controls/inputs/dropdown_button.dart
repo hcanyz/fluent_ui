@@ -94,7 +94,7 @@ class DropDownButton extends StatefulWidget {
   ///  * [MenuFlyoutItemBuilder], which renders the given widget in the items list
   final List<MenuFlyoutItemBase>? items;
 
-  final Widget Function(
+  final Widget Function(BuildContext context,
           Widget Function(List<MenuFlyoutItemBase> items) itemsConverter)?
       itemBuilder;
 
@@ -354,7 +354,7 @@ class DropDownButtonState extends State<DropDownButton> {
             items: items.map((item) => transformItem(item, context)).toList(),
           );
         }
-        return widget.itemBuilder!((List<MenuFlyoutItemBase> items) {
+        return widget.itemBuilder!(context, (List<MenuFlyoutItemBase> items) {
           return MenuFlyout(
             color: widget.menuColor,
             shape: widget.menuShape,
