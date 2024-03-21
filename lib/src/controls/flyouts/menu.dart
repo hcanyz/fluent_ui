@@ -504,7 +504,7 @@ class _MenuFlyoutSubItemState extends State<_MenuFlyoutSubItem>
                 color: menuFlyout?.color,
                 constraints: menuFlyout?.constraints,
                 elevation: menuFlyout?.elevation ?? 8.0,
-                padding: menuFlyout?.padding,
+                padding: EdgeInsetsDirectional.zero,
                 shadowColor: menuFlyout?.shadowColor ?? Colors.black,
                 shape: menuFlyout?.shape,
                 items: widget.items(context),

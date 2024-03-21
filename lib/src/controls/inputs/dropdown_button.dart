@@ -351,6 +351,7 @@ class DropDownButtonState extends State<DropDownButton> {
           return MenuFlyout(
             color: widget.menuColor,
             shape: widget.menuShape,
+            padding: EdgeInsetsDirectional.zero,
             items: items.map((item) => transformItem(item, context)).toList(),
           );
         }
@@ -358,6 +359,7 @@ class DropDownButtonState extends State<DropDownButton> {
           return MenuFlyout(
             color: widget.menuColor,
             shape: widget.menuShape,
+            padding: EdgeInsetsDirectional.zero,
             items: items.map((item) => transformItem(item, context)).toList(),
           );
         });
