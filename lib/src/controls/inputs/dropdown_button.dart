@@ -43,6 +43,7 @@ class DropDownButton extends StatefulWidget {
     this.placement = FlyoutPlacementMode.bottomCenter,
     this.menuShape,
     this.menuColor,
+    this.menuPadding = const EdgeInsetsDirectional.only(top: 8.0),
     this.onOpen,
     this.onClose,
     this.transitionBuilder = _defaultTransitionBuilder,
@@ -124,6 +125,8 @@ class DropDownButton extends StatefulWidget {
 
   /// The menu color. If null, [FluentThemeData.menuColor] is used
   final Color? menuColor;
+
+  final EdgeInsetsGeometry? menuPadding;
 
   /// Called when the flyout is opened
   final VoidCallback? onOpen;
@@ -351,7 +354,7 @@ class DropDownButtonState extends State<DropDownButton> {
           return MenuFlyout(
             color: widget.menuColor,
             shape: widget.menuShape,
-            padding: EdgeInsetsDirectional.zero,
+            padding: widget.menuPadding,
             items: items.map((item) => transformItem(item, context)).toList(),
           );
         }
@@ -359,7 +362,7 @@ class DropDownButtonState extends State<DropDownButton> {
           return MenuFlyout(
             color: widget.menuColor,
             shape: widget.menuShape,
-            padding: EdgeInsetsDirectional.zero,
+            padding: widget.menuPadding,
             items: items.map((item) => transformItem(item, context)).toList(),
           );
         });
