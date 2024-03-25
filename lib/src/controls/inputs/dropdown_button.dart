@@ -397,6 +397,7 @@ class DropDownButtonState extends State<DropDownButton> {
       trailing: item.trailing,
       showBehavior: item.showBehavior,
       showHoverDelay: item.showHoverDelay,
+      onSubMenuShow: item.onSubMenuShow,
     );
   }
 
