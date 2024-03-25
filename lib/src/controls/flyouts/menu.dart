@@ -357,6 +357,7 @@ class MenuFlyoutSubItem extends MenuFlyoutItem {
     required this.items,
     this.showBehavior = SubItemShowBehavior.hover,
     this.showHoverDelay = const Duration(milliseconds: 450),
+    this.onSubMenuShow,
   }) : super(onPressed: null);
 
   /// It is the key of `_MenuFlyoutSubItem`, built in the `build` method. It
@@ -382,6 +383,8 @@ class MenuFlyoutSubItem extends MenuFlyoutItem {
   final Duration showHoverDelay;
 
   bool disableAcyrlic = false;
+
+  final VoidCallback? onSubMenuShow;
 
   @override
   Widget build(BuildContext context) {
@@ -524,6 +527,8 @@ class _MenuFlyoutSubItemState extends State<_MenuFlyoutSubItem>
 
     transitionController.forward();
     setState(() {});
+
+    widget.item.onSubMenuShow?.call();
   }
 
   /// Closes this menu and its children
