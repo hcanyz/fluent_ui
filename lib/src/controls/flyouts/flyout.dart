@@ -635,7 +635,7 @@ class FlyoutController with ChangeNotifier {
           }
         };
 
-        return MenuInfoProvider(
+        final child = MenuInfoProvider(
           builder: (context, rootSize, menus, keys) {
             assert(menus.length == keys.length);
 
@@ -774,6 +774,16 @@ class FlyoutController with ChangeNotifier {
             );
           },
         );
+
+        final themes = InheritedTheme.capture(
+          from: context,
+          to: Navigator.of(
+            context,
+            rootNavigator: true,
+          ).context,
+        );
+
+        return themes.wrap(child);
       },
     ));
 
