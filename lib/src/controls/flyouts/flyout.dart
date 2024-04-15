@@ -599,6 +599,14 @@ class FlyoutController with ChangeNotifier {
     _open = true;
     notifyListeners();
 
+    final themes = InheritedTheme.capture(
+      from: context,
+      to: Navigator.of(
+        context,
+        rootNavigator: true,
+      ).context,
+    );
+
     final flyoutKey = GlobalKey();
 
     final result = await navigator.push<T>(PageRouteBuilder<T>(
@@ -773,14 +781,6 @@ class FlyoutController with ChangeNotifier {
               child: box,
             );
           },
-        );
-
-        final themes = InheritedTheme.capture(
-          from: context,
-          to: Navigator.of(
-            context,
-            rootNavigator: true,
-          ).context,
         );
 
         return themes.wrap(child);
