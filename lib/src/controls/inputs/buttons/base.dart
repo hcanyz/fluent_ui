@@ -1,4 +1,3 @@
-// import 'package:flutter/material.dart' as m;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 
@@ -109,10 +108,21 @@ abstract class BaseButton extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(
-          DiagnosticsProperty<ButtonStyle>('style', style, defaultValue: null))
-      ..add(DiagnosticsProperty<FocusNode>('focusNode', focusNode,
-          defaultValue: null));
+      ..add(DiagnosticsProperty<ButtonStyle>(
+        'style',
+        style,
+        defaultValue: null,
+      ))
+      ..add(DiagnosticsProperty<FocusNode>(
+        'focusNode',
+        focusNode,
+        defaultValue: null,
+      ))
+      ..add(DiagnosticsProperty<bool>(
+        'autofocus',
+        autofocus,
+        defaultValue: false,
+      ));
   }
 }
 
