@@ -255,7 +255,7 @@ class MenuFlyoutItem extends MenuFlyoutItemBase {
   final Widget? trailing;
 
   /// Called when the item is pressed.
-  final VoidCallback? onPressed;
+  final FutureOr<void> Function()? onPressed;
 
   /// Whether this item is selected or not.
   final bool selected;
@@ -283,11 +283,11 @@ class MenuFlyoutItem extends MenuFlyoutItemBase {
           data: const IconThemeData(size: 12.0),
           child: trailing ?? const SizedBox.shrink(),
         ),
-        onPressed: () {
-          if (closeAfterClick) {
+        onPressed: () async {
+          await onPressed?.call();
+          if (closeAfterClick && context.mounted) {
             Navigator.of(context).maybePop();
           }
-          onPressed?.call();
         },
       ),
     );
